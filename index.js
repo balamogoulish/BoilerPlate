@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose')
+const { userInfo } = require('os')
 mongoose.connect(config.mongoURI,{
 }).then(()=>console.log('MongoDB Connected...'))
   .catch(err=>console.log(err))
@@ -29,6 +30,33 @@ app.post('/register', async (req,res) => {
     } catch (err) {
       return res.json({success:false, err})
     }
+})
+
+app.post('/login', (req, res)=>{
+  //요청된 이메일을 DB에서 찾음
+  User.findOne({email: req.body.email}).then(user=>{
+    if(!user){
+      return res.json({
+        loginSuccess: false,
+        message: "제공된 이메일에 해당하는 유저가 없습니다."
+      })
+    }
+    //요청한 이메일이 DB에 있다면, 비밀번호가 일치한지 확인함
+    user.comparePassword(req.body.password, (err, isMatch)=>{
+      if(!isMatch) return res.json({
+        loginSuccess:false,
+        message: "비밀번호가 틀렸습니다."
+      })
+
+      return res.json({
+        loginSuccess: true,
+        message: "로그인에 성공했습니다!"
+      })
+    })
+  }).catch((err)=>{
+    return res.status(400).send(err);
+  })
+  //비밀번호까지 맞다면, user를 위한 token을 생성함
 })
 
 app.listen(port, () => {
