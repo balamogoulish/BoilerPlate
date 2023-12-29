@@ -48,15 +48,21 @@ app.post('/login', (req, res)=>{
         message: "비밀번호가 틀렸습니다."
       })
 
-      return res.json({
-        loginSuccess: true,
-        message: "로그인에 성공했습니다!"
+      //비밀번호가 맞다면, 토큰을 생성함
+      user.generateToken((err, user)=>{
+        if(err) return res.status(400).send(err);
+        //토큰을 쿠키에 저장함
+        res.cookie("x_auth",user.token)
+        .status(200)
+        .json({
+          loginSuccess: true,
+          userId: user._id
+        })
       })
     })
   }).catch((err)=>{
     return res.status(400).send(err);
   })
-  //비밀번호까지 맞다면, user를 위한 token을 생성함
 })
 
 app.listen(port, () => {
