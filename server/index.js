@@ -74,7 +74,6 @@ app.post('/api/users/login', (req, res)=>{
 app.get("/api/users/auth", auth, (req, res) => {    // auth middleware : endpoint에서 request를 받은 후 callback 함수를 호출하기 전에 기능을 추가해줌
   // middleware를 통과해왔음!
   // = Authentication이 True
-
   res.status(200).json({
       _id: req.user._id,
       isAdmin: req.user.role === 0 ? false: true,   
