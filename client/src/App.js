@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom';
@@ -11,7 +10,6 @@ import RegisterPage from './components/views/RegisterPage/RegisterPage'
 
 function App() {
   return (
-    <BrowserRouter>
       <div>
         {
 
@@ -22,7 +20,6 @@ function App() {
           <Route exact path = "/register" element = {RegisterPage()} />  
         </Routes>
       </div>
-    </BrowserRouter>
   );
 }
 
