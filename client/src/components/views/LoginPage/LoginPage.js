@@ -37,9 +37,10 @@ function LoginPage(){
 
     return(
         <div style={{
-            display: 'flex', justifyContent: 'center', alignItems: 'center',
+            display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center',
             width: '100%', height: '100vh'
         }}>
+            <h2>로그인 페이지</h2>
             <form style={{display: 'flex', flexDirection:'column'}}
                 onSubmit={onSubmitHandler}
             >

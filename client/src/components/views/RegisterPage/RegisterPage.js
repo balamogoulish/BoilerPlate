@@ -48,23 +48,24 @@ function RegisterPage() {
   }
   return(
     <div style={{
-        display: 'flex', justifyContent: 'center', alignItems: 'center',
+        display: 'flex', flexDirection:'column',justifyContent: 'center', alignItems: 'center',
         width: '100%', height: '100vh'
     }}>
-        <form style={{display: 'flex', flexDirection:'column'}}
-            onSubmit={onSubmitHandler}
-        >
-            <label>Email</label>
-            <input type='email' value={Email} onChange={onEmailHandler}/>
-            <label>Name</label>
-            <input type='text' value={Name} onChange={onNameHandler}/>
-            <label>Password</label>
-            <input type='password' value={Password} onChange={onPasswordHandler}/>
-            <label>Password Confirm</label>
-            <input type='password' value={ConfirmPassword} onChange={onConfirmPasswordHandler}/>
-            <br/>
-            <button>Sign Up</button>
-        </form>
+      <h2>회원가입 페이지</h2>
+      <form style={{display: 'flex', flexDirection:'column'}}
+        onSubmit={onSubmitHandler}
+      >
+        <label>Email</label>
+        <input type='email' value={Email} onChange={onEmailHandler}/>
+        <label>Name</label>
+        <input type='text' value={Name} onChange={onNameHandler}/>
+        <label>Password</label>
+        <input type='password' value={Password} onChange={onPasswordHandler}/>
+        <label>Password Confirm</label>
+        <input type='password' value={ConfirmPassword} onChange={onConfirmPasswordHandler}/>
+        <br/>
+        <button>Sign Up</button>
+      </form>
     </div>
 )
 }
